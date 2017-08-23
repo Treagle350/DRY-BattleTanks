@@ -6,13 +6,24 @@ namespace BattlingTanks{
 Game_engine::Game_engine()
 {
     turns = 0;
-
+    info_screen();
     player = new Player();
     computer = new Computer();
 }
 Game_engine::~Game_engine()
 {
     //dtor
+}
+void Game_engine::info_screen()
+{
+    std::cout << std::endl;
+    std::cout << "Coordinates on the board range from 0 to 2" << std::endl;
+    std::cout << "Coordinates are entered as following :" << std::endl;
+    std::cout << "x : 2" << std::endl;
+    std::cout << "y : 0" << std::endl;
+    std::cout << "Whereas x represents the vertical columns of the board" << std::endl;
+    std::cout << "And y represents the horizontal rows of the board" << std::endl;
+    std::cout << std::endl;
 }
 void Game_engine::receive_damage(Projectile projectile,Base_Player_Class* entity)
 {

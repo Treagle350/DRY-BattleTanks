@@ -19,6 +19,7 @@ class Game_engine
 
         void win_screen();
         void game_over();
+        void info_screen();
 
         void npc_receive_damage(Projectile projectile);
         void player_receive_damage(Projectile projectile);
