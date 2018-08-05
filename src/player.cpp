@@ -21,21 +21,23 @@ void Player::where_should_the_tanks_be_placed()
         if(!(x>=0&&x<3)){
             std::cout<<"x should be between 0 and 2";
             std::cin>>x;
+        }else{
+            std::cout<<std::endl;
         }
-        std::cout<<std::endl;
-        std::cout<<"y :";
-        std::cin>>y;
+            std::cout<<"y :";
+            std::cin>>y;
         if(!(y>=0&&y<3)){
             std::cout<<"y should be between 0 and 2";
             std::cin>>y;
+        }else{
+            std::cout<<std::endl;
         }
-        std::cout<<std::endl;
         add_tank(x,y);
     }
 }
 void Player::add_tank(int x,int y)
 {
     tanks.add_tank(x,y);
-    player_board.change_tile(x,y,"[T]");
+    board.change_tile(x,y,"[T]");
 }
 }

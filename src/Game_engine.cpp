@@ -7,8 +7,8 @@ Game_engine::Game_engine()
 {
     turns = 0;
     info_screen();
-    player = new Player();
-    computer = new Computer();
+    Player *player = new Player();
+    NPC *computer = new NPC();
 }
 Game_engine::~Game_engine()
 {
@@ -49,8 +49,8 @@ void Game_engine::game_over()
 bool Game_engine::end_game()
 {
     bool ended = false;
-    if(player->get_tank_array().tanks.size()==0||computer->get_tank_array().tanks.size()==0){
-        if(player->get_tank_array().tanks.size()==0){
+    if(player.get_tank_array().tanks.size()==0||computer.get_tank_array().tanks.size()==0){
+        if(player.get_tank_array().tanks.size()==0){
             game_over();
             ended = true;
         }else{
@@ -64,7 +64,7 @@ void Game_engine::player_guess()
 {
     turns = turns + 1;
     int x,y;
-    for (int i = 0;i<player->get_tank_array().tanks.size();i++){
+    for (int i = 0;i<player.get_tank_array().tanks.size();i++){
         std::cout<<"Please enter the coordinates you would like tank #"<< i <<" to fire at :"<<std::endl;
         std::cout<<"x :";
         std::cin>>x;
@@ -80,19 +80,19 @@ void Game_engine::player_guess()
             std::cin>>y;
         }
         std::cout<<"Displaying computer's board"<<std::endl;
-        guess(computer,player);
+        guess(&computer,&player,x,y,i);
     }
 }
 void Game_engine::npc_guess()
 {
-    for (int i = 0;i<computer->get_tank_array().tanks.size();i++){
+    for (int i = 0;i<computer.get_tank_array().tanks.size();i++){
         int x = (rand()*10) % 3;
         int y = (rand()*10) % 3;
         std::cout<<"Displaying player's board"<<std::endl;
-        guess(player,computer);
+        guess(&player,&computer,x,y,i);
     }
 }
-void Game_engine::guess(Base_Player_Class* entity,Base_Player_Class* receiving_entity)
+void Game_engine::guess(Base_Player_Class* entity,Base_Player_Class* receiving_entity, int x, int y, int i)
 {
     receiving_entity->get_board().change_tile(x,y,"[O]");
     receive_damage(entity->get_tank_array().tanks.at(i)->shoot(x,y),receiving_entity);
